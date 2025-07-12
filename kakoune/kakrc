@@ -1,0 +1,118 @@
+# set transparent background
+set-face global Default rgb:d9d9d9,default
+set-face global BufferPadding rgb:d9d9d9,default
+
+# other aesthetic options
+set-option global tabstop 4
+set-option global scrolloff 4,8
+
+# use editorconfig
+hook global BufOpenFile .* %{ editorconfig-load }
+hook global BufNewFile .* editorconfig-load
+
+# clipboard usage ( doesn't work )
+# map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -i<ret>"
+# map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
+
+# indentation with spaces
+hook global InsertChar \t %{ try %{
+    execute-keys -draft "h<a-h><a-k>\A\h+\z<ret><a-;>;%opt{indentwidth}@"
+}}
+
+hook global InsertDelete ' ' %{ try %{
+    execute-keys -draft 'h<a-h><a-k>\A\h+\z<ret>i<space><esc><lt>'
+}}
+
+source "%val{config}/plugins/plug.kak/rc/plug.kak"
+plug "andreyorst/plug.kak" noload
+plug "kakoune-lsp/kakoune-lsp" noload
+plug "niliaranet/yazi.kak"
+plug "https://sr.ht/~hadronized/kak-tree-sitter"
+
+plug "andreyorst/fzf.kak" config %{
+  map global normal <c-p> ': fzf-mode<ret>'
+} defer <module-name> %{
+  <settings of module>
+}
+
+hook global NormalKey <c-x> %{ try %{
+    execute-keys 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
+}}
+
+# hook global InsertKey <c-x> %{ try %{
+#     execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
+# }}
+
+eval %sh{ kak-tree-sitter -dks --init $kak_session --with-highlighting }
+
+
+hook global BufCreate .*\.(gleam) %{
+    set-option buffer filetype gleam
+}
+
+hook global WinSetOption filetype=gleam %{
+    require-module gleam
+}
+
+provide-module gleam %{
+}
+
+
+# lsp
+eval %sh{kak-lsp}
+lsp-enable
+
+map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
+map global normal <c-l> ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
+
+map global user a '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global user <a-a> '<a-semicolon>lsp-object<ret>' -docstring 'LSP any symbol'
+map global user f '<a-semicolon>lsp-object Function Method<ret>' -docstring 'LSP function or method'
+map global user t '<a-semicolon>lsp-object Class Interface Struct<ret>' -docstring 'LSP class interface or struct'
+map global user d '<a-semicolon>lsp-diagnostic-object --include-warnings<ret>' -docstring 'LSP errors and warnings'
+map global user D '<a-semicolon>lsp-diagnostic-object<ret>' -docstring 'LSP errors'
+
+hook global BufSetOption filetype=go %{
+    hook buffer BufWritePre .* lsp-formatting-sync
+}
+
+hook global BufSetOption filetype=rust %{
+    hook buffer BufWritePre .* lsp-formatting-sync
+}
+
+hook global BufSetOption filetype=elixir %{
+    hook buffer BufWritePre .* lsp-formatting-sync
+}
+
+hook global BufSetOption filetype=gleam %{
+    hook buffer BufWritePre .* lsp-formatting-sync
+}
+
+map global normal <a-y> ':yazi-root<ret>'
+map global normal <c-y> ':yazi<ret>'
+
+map global normal <c-k> ':db<ret>'
+
+hook -group lsp-filetype-elixir global BufSetOption filetype=gleam %{
+    set-option buffer lsp_servers %{
+        [gleam]
+        filetypes = ["gleam"]
+        root_globs = ["gleam.toml", "manifest.toml"]
+        command = "/usr/bin/gleam"
+        args = ["lsp"]
+    }
+}
+
+hook -group lsp-filetype-elixir global BufSetOption filetype=(?:elixir|ex|exs) %{
+    set-option buffer lsp_servers %{
+        [elixir-ls]
+        root_globs = ["mix.exs"]
+        settings_section = "elixirLS"
+        [elixir-ls.settings.elixirLS]
+        # See https://github.com/elixir-lsp/elixir-ls/blob/master/apps/language_server/lib/language_server/server.ex
+        # dialyzerEnable = true
+    }
+}
+
+
+map global normal <c-t> ':terminal sh<ret>'
