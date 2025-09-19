@@ -1,3 +1,5 @@
+colorscheme tomorrow-night
+
 # set transparent background
 set-face global Default rgb:d9d9d9,default
 set-face global BufferPadding rgb:d9d9d9,default
@@ -11,8 +13,8 @@ hook global BufOpenFile .* %{ editorconfig-load }
 hook global BufNewFile .* editorconfig-load
 
 # clipboard usage ( doesn't work )
-# map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -i<ret>"
-# map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
+map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -i<ret>"
+map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
 
 # indentation with spaces
 hook global InsertChar \t %{ try %{
@@ -35,27 +37,15 @@ plug "andreyorst/fzf.kak" config %{
   <settings of module>
 }
 
-hook global NormalKey <c-x> %{ try %{
+hook global NormalKey <c-a> %{ try %{
     execute-keys 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
 }}
 
-# hook global InsertKey <c-x> %{ try %{
-#     execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
-# }}
+hook global InsertKey <c-a> %{ try %{
+    execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
+}}
 
 eval %sh{ kak-tree-sitter -dks --init $kak_session --with-highlighting }
-
-
-hook global BufCreate .*\.(gleam) %{
-    set-option buffer filetype gleam
-}
-
-hook global WinSetOption filetype=gleam %{
-    require-module gleam
-}
-
-provide-module gleam %{
-}
 
 
 # lsp
@@ -84,16 +74,20 @@ hook global BufSetOption filetype=elixir %{
     hook buffer BufWritePre .* lsp-formatting-sync
 }
 
-hook global BufSetOption filetype=gleam %{
-    hook buffer BufWritePre .* lsp-formatting-sync
-}
+# hook global BufSetOption filetype=gleam %{
+#     hook buffer BufWritePre .* lsp-formatting-sync
+# }
 
 map global normal <a-y> ':yazi-root<ret>'
 map global normal <c-y> ':yazi<ret>'
-
 map global normal <c-k> ':db<ret>'
 
-hook -group lsp-filetype-elixir global BufSetOption filetype=gleam %{
+
+hook global WinSetOption filetype=gleam %{
+    require-module gleam
+}
+
+hook -group lsp-filetype-gleam global BufSetOption filetype=gleam %{
     set-option buffer lsp_servers %{
         [gleam]
         filetypes = ["gleam"]
@@ -103,16 +97,4 @@ hook -group lsp-filetype-elixir global BufSetOption filetype=gleam %{
     }
 }
 
-hook -group lsp-filetype-elixir global BufSetOption filetype=(?:elixir|ex|exs) %{
-    set-option buffer lsp_servers %{
-        [elixir-ls]
-        root_globs = ["mix.exs"]
-        settings_section = "elixirLS"
-        [elixir-ls.settings.elixirLS]
-        # See https://github.com/elixir-lsp/elixir-ls/blob/master/apps/language_server/lib/language_server/server.ex
-        # dialyzerEnable = true
-    }
-}
-
-
-map global normal <c-t> ':terminal sh<ret>'
+map global normal <c-e> ':terminal sh<ret>'
