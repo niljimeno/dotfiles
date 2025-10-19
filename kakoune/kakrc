@@ -1,8 +1,8 @@
-colorscheme tomorrow-night
+colorscheme plain
 
 # set transparent background
-set-face global Default rgb:d9d9d9,default
-set-face global BufferPadding rgb:d9d9d9,default
+# set-face global Default rgb:d9d9d9,default
+# set-face global BufferPadding rgb:d9d9d9,default
 
 # other aesthetic options
 set-option global tabstop 4
@@ -74,9 +74,9 @@ hook global BufSetOption filetype=elixir %{
     hook buffer BufWritePre .* lsp-formatting-sync
 }
 
-# hook global BufSetOption filetype=gleam %{
-#     hook buffer BufWritePre .* lsp-formatting-sync
-# }
+hook global BufSetOption filetype=gleam %{
+    hook buffer BufWritePre .* lsp-formatting-sync
+}
 
 map global normal <a-y> ':yazi-root<ret>'
 map global normal <c-y> ':yazi<ret>'

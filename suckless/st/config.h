@@ -7,13 +7,13 @@
  */
 
 // #include "themes/red_a.h"
-#include "themes/cherry.h"
+#include "themes/topi.h"
 
 static char *font = "Hasklig-Regular:pixelsize=22";
 
 static int borderpx = 2;
 
-float alpha = 0.9;
+float alpha = 0.8;
 
 /*
  * What program is execed by st depends of these precedence rules:
