@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
-#include "themes/pulsar.h"
+#include "themes/peripeteia.h"
 
 /* appearance */
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 25;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 0;        /* 0 means no bar */
