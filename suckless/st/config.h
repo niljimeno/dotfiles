@@ -6,14 +6,17 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-// #include "themes/red_a.h"
-#include "themes/topi.h"
+/* hacker mode */
+// #include "themes/topi.h"
+
+/* enlighened mode */
+#include "themes/fujilight.h"
 
 static char *font = "Hasklig-Regular:pixelsize=22";
 
 static int borderpx = 2;
 
-float alpha = 0.8;
+float alpha = 1;
 
 /*
  * What program is execed by st depends of these precedence rules:
