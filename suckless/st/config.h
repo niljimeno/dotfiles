@@ -7,14 +7,14 @@
  */
 
 /* hacker mode */
-// #include "themes/topi.h"
+#include "themes/gruvbox.h"
 
 /* enlighened mode */
-#include "themes/fujilight.h"
+// #include "themes/fujilight.h"
 
 static char *font = "Hasklig-Regular:pixelsize=22";
 
-static int borderpx = 2;
+static int borderpx = 14;
 
 float alpha = 1;
 
