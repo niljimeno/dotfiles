@@ -8,7 +8,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 0;        /* gaps between windows */
+static const unsigned int gappx     = 32;        /* gaps between windows */
 static const unsigned int snap      = 4;       /* snap pixel */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */

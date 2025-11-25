@@ -12,9 +12,9 @@ set-option global scrolloff 4,8
 hook global BufOpenFile .* %{ editorconfig-load }
 hook global BufNewFile .* editorconfig-load
 
-# clipboard usage ( doesn't work )
-map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -i<ret>"
-map -docstring "paste the clipboard" global user p "<a-!> xsel<ret>"
+# clipboard usage ( now works on the default clipboard! )
+map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -ib<ret>"
+map -docstring "paste the clipboard" global user p "<a-!> xsel -ob<ret>"
 
 # indentation with spaces
 hook global InsertChar \t %{ try %{
@@ -28,8 +28,11 @@ hook global InsertDelete ' ' %{ try %{
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 plug "kakoune-lsp/kakoune-lsp" noload
-plug "niliaranet/yazi.kak"
+plug "niljimeno/yazi.kak"
 plug "https://sr.ht/~hadronized/kak-tree-sitter"
+plug "alexherbo2/auto-pairs.kak"
+
+enable-auto-pairs
 
 plug "andreyorst/fzf.kak" config %{
   map global normal <c-p> ': fzf-mode<ret>'
