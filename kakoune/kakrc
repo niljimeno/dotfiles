@@ -29,6 +29,7 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 plug "kakoune-lsp/kakoune-lsp" noload
 plug "niljimeno/yazi.kak"
+plug "niljimeno/qmake.kak"
 plug "https://sr.ht/~hadronized/kak-tree-sitter"
 plug "alexherbo2/auto-pairs.kak"
 
@@ -101,3 +102,6 @@ hook -group lsp-filetype-gleam global BufSetOption filetype=gleam %{
 }
 
 map global normal <c-e> ':terminal sh<ret>'
+
+map -docstring "run using gnumake" \
+    global normal <c-r> ':qmake "make run"<ret>'

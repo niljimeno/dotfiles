@@ -1,2 +1,2 @@
-header_visibility = no
 mpd_music_dir = ~/Music
+playlist_display_mode = classic
