@@ -6,13 +6,8 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-/* hacker mode */
 #include "themes/gruvbox.h"
-
-/* enlighened mode */
-// #include "themes/fujilight.h"
-
-static char *font = "Hasklig-Regular:pixelsize=22";
+static char *font = "Iosevka Term:pixelsize=24";
 
 static int borderpx = 14;
 
