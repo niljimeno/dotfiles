@@ -1,0 +1,10 @@
+xset r rate 120 90
+redshift -O 3000 -P
+# picom -b
+
+rm ~/.bash_history*
+
+feh --bg-fill ~/.config/wallpapers/lain5.png
+unclutter -idle 1 -b
+
+exec dwm

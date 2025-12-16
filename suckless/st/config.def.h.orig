@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-#include "themes/connect.h"
+#include "themes/gruvbox.h"
 static char *font = "Iosevka Term:pixelsize=24";
 
 static int borderpx = 14;
@@ -102,10 +102,10 @@ unsigned int tabspaces = 8;
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-// unsigned int defaultfg = 258;
-// unsigned int defaultbg = 259;
-// unsigned int defaultcs = 256;
-// static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 258;
+unsigned int defaultbg = 259;
+unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -114,7 +114,7 @@ unsigned int tabspaces = 8;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 4;
+static unsigned int cursorshape = 2;
 
 /*
  * Default columns and rows numbers
@@ -148,12 +148,12 @@ static uint forcemousemod = ShiftMask;
  * Beware that overloading Button1 will disable the selection.
  */
 static MouseShortcut mshortcuts[] = {
-	/* mask                 button          function        argument       release */
-	{ XK_ANY_MOD,           Button2,        selpaste,       {.i = 0},      1 },
-	{ ShiftMask,            Button4,        ttysend,        {.s = "\033[5;2~"} },
-	{ XK_ANY_MOD,           Button4,        ttysend,        {.s = "\031"} },
-	{ ShiftMask,            Button5,        ttysend,        {.s = "\033[6;2~"} },
-	{ XK_ANY_MOD,           Button5,        ttysend,        {.s = "\005"} },
+	/* mask                 button   function        argument       release */
+	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+	{ ShiftMask,            Button5, ttysend,        {.s = "\033[6;2~"} },
+	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
 };
 
 /* Internal keyboard shortcuts. */
@@ -174,8 +174,6 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ ControlMask|ShiftMask,XK_K,           kscrollup,      {.i = -1} },
-	{ ControlMask|ShiftMask,XK_J,           kscrolldown,    {.i = -1} },
 };
 
 /*

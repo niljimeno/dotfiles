@@ -1,0 +1,11 @@
+# colorscheme gruvbox-dark
+# set transparent background
+# set-face global Default rgb:d9d9d9,default
+# set-face global BufferPadding rgb:d9d9d9,default
+
+plug "https://sr.ht/~hadronized/kak-tree-sitter"
+eval %sh{ kak-tree-sitter -dks --init $kak_session --with-highlighting }
+
+# to fix module indentation in chicken scheme
+# add module to /usr/share/kak/rc/filetype/lisp.kak:
+#  '(?:def.*|if(-.*|)|let.*|lambda|with-.*|when(-.*|)|module)'
