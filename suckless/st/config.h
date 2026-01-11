@@ -6,12 +6,12 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-#include "themes/connect.h"
+#include "themes/ena.h"
 static char *font = "Iosevka Term:pixelsize=24";
 
 static int borderpx = 14;
 
-float alpha = 1;
+float alpha = 0.9;
 
 /*
  * What program is execed by st depends of these precedence rules:

@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 /* Default settings; can be overriden by command line. */
 
-#include "themes/connect.h"
+#include "themes/topi.h"
 
 static int topbar = 0;
 /* -b  option; if 0, dmenu appears at bottom     */

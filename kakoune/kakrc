@@ -1,6 +1,8 @@
-declare-option str black 'rgb:000000'
-declare-option str menu 'rgb:222222'
-set-face global MenuBackground "default,%opt{menu}"
+# declare-option str black 'rgb:000000'
+# declare-option str menu 'rgb:222222'
+# set-face global MenuBackground "default,%opt{menu}"
+
+colorscheme mygruvbox
 
 # other aesthetic options
 set-option global tabstop 4
@@ -80,13 +82,35 @@ hook -group lsp-filetype-gleam global BufSetOption filetype=gleam %{
     }
 }
 
+hook -group lsp-filetype-gleam global BufSetOption filetype=csharp %{
+    set-option buffer lsp_servers %{
+        [gleam]
+        filetypes = ["csharp"]
+        root_globs = [".csproj", "app.manifest"]
+        command = "/usr/bin/csharp-ls"
+    }
+}
+
+# autoformat on save
 hook global BufSetOption filetype=(clojure|go) %{
     hook buffer BufWritePre .* lsp-formatting-sync
 }
 
+# open a new terminal window
 map global normal <c-e> ':terminal sh<ret>'
 
 map -docstring "run using gnumake" \
     global normal <a-r> ':qmake "make run"<ret>'
 
 map global normal <c-r> ':terminal make run<ret>'
+
+
+# multiple windows
+define-command split %{
+    new edit %sh{ echo "$kak_buffile" }
+}
+map global normal <c-w> ':split<ret>'
+map global insert <c-w> '<esc>:split<ret>i'
+
+
+source "%val{config}/csharp.kak"
