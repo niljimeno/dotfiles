@@ -6,7 +6,7 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-#include "themes/ena.h"
+#include "themes/tmp.h"
 static char *font = "Iosevka Term:pixelsize=24";
 
 static int borderpx = 14;

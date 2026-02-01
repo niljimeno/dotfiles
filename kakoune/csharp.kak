@@ -3,7 +3,7 @@
 # Detection
 # ‾‾‾‾‾‾‾‾‾
 
-hook global BufCreate .*[.](cs) %{
+hook global BufCreate .*[.](cs|cshtml) %{
   set-option buffer filetype csharp
 }
 
