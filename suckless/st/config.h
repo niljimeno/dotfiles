@@ -7,7 +7,8 @@
  */
 
 #include "themes/tmp.h"
-static char *font = "Iosevka Term:pixelsize=24";
+// static char *font = "Iosevka Term:pixelsize=24";
+static char *font = "Sarasa Mono Slab K:pixelsize=24";
 
 static int borderpx = 14;
 

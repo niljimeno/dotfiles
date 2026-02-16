@@ -30,6 +30,7 @@ plug "andreyorst/plug.kak" noload
 plug "kakoune-lsp/kakoune-lsp" noload
 plug "niljimeno/yazi.kak"
 plug "niljimeno/qmake.kak"
+plug "niljimeno/compile.kak"
 plug "alexherbo2/auto-pairs.kak"
 
 enable-auto-pairs
@@ -82,9 +83,9 @@ hook -group lsp-filetype-gleam global BufSetOption filetype=gleam %{
     }
 }
 
-hook -group lsp-filetype-gleam global BufSetOption filetype=csharp %{
+hook -group lsp-filetype-csharp global BufSetOption filetype=csharp %{
     set-option buffer lsp_servers %{
-        [gleam]
+        [csharp]
         filetypes = ["csharp"]
         root_globs = [".csproj", "app.manifest"]
         command = "/usr/bin/csharp-ls"
@@ -99,10 +100,11 @@ hook global BufSetOption filetype=(clojure|go) %{
 # open a new terminal window
 map global normal <c-e> ':terminal sh<ret>'
 
-map -docstring "run using gnumake" \
-    global normal <a-r> ':qmake "make run"<ret>'
+map -docstring "Compile (prompted)" \
+    global normal <a-r> ':compile<ret>'
 
-map global normal <c-r> ':terminal make run<ret>'
+map -docstring "Compile (no prompts)" \
+    global normal <c-r> ':compile-quick<ret>'
 
 
 # multiple windows
@@ -113,4 +115,10 @@ map global normal <c-w> ':split<ret>'
 map global insert <c-w> '<esc>:split<ret>i'
 
 
+plug "eraserhd/parinfer-rust" config %{
+    hook global WinSetOption filetype=(clojure|lisp|picolisp|racket|scheme) %{
+        parinfer-enable-window -smart
+    }
+}
 source "%val{config}/csharp.kak"
+source "%val{config}/idris.kak"
