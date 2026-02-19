@@ -1,0 +1,50 @@
+* movement
++ C-f C-b M-f M-b : move through words
++ C-a C-e : move to end/start of line
++ M-a M-e : move to end/start of paragraph
++ M-< M-> : move to end/start of buffer
++ M-r : move to end/start line
++ C-M-b C-M-f : move to start/beginning of next parentheses
+
+* text manipulation
++ C-d : delete char
++ M-d : delete word
++ C-o : add line without moving
+
+* windows
++ C-o : change window
++ C-3 : add new window (horizontal)
++ C-0 : remove window
+
+* copying
++ C-Space : start selection
++ C-x h : select all
+
++ C-w : cut
++ M-w : copy
++ C-y : paste
+
+* eval
+C-x C-e : eval
+
+* modes
++ C-i : tab
+
+* help
++ C-h k describe-key
++ C-h f describe-function
+  
++ C-g quit/cancel
+
+
+* dirmode
++ + : create directory
++ C-x C-f : create file
++ g : refresh directory
+
+* slime
++ M-x slime : connect to slime
++ C-c C-c : compile defun
++ C-c C-k : compile file
++ C-c C-e : use repl on current function
++ C-c TAB : autocomplete

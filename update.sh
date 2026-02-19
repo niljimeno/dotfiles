@@ -1,7 +1,9 @@
 #!/bin/sh
 
-# kakoune
+# editor configs
 cp ~/.config/kak/* ./kakoune/
+cp ~/.emacs.d/* ./emacs/
+cp ~/.editorconfig ./editorconfig
 
 # suckless
 rm -rf ./suckless/*
