@@ -1,14 +1,9 @@
 #!/bin/sh
 
 # editor configs
-rm -rf ./kakoune
-cp -r ~/.config/kak ./kakoune
-cd kakoune && ( find . -type d -name ".git" \
-  && find . -name ".gitignore" \
-  && find . -name ".gitmodules" ) | xargs rm -rf
-
-cd ..
-rm -rf ./kakoune/plugins/.build/
+cp ~/.config/kak/* ./kakoune/
+cp -r ~/.config/kak/colors/ ./kakoune/
+cp -r ~/.config/kak/highlighters/ ./kakoune/
 
 cp ~/.emacs.d/* ./emacs/
 cp ~/.editorconfig ./editorconfig

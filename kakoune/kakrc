@@ -32,7 +32,6 @@ plug "niljimeno/yazi.kak"
 plug "niljimeno/qmake.kak"
 plug "niljimeno/compile.kak"
 plug "alexherbo2/auto-pairs.kak"
-plug 'thacuber2a03/highlighters.kak'
 
 enable-auto-pairs
 
@@ -119,6 +118,14 @@ map global insert <c-w> '<esc>:split<ret>i'
 source "%val{config}/csharp.kak"
 source "%val{config}/idris.kak"
 source "%val{config}/jk.kak"
+
+source "%val{config}/highlighters/abnf.kak"
+source "%val{config}/highlighters/ebnf.kak"
+source "%val{config}/highlighters/forth.kak"
+source "%val{config}/highlighters/nelua.kak"
+source "%val{config}/highlighters/uiua.kak"
+source "%val{config}/highlighters/umka.kak"
+source "%val{config}/highlighters/uxntal.kak"
 
 # add-highlighter global/ number-lines
 # hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines }
