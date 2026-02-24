@@ -12,3 +12,22 @@
 
 (setq custom-safe-themes t)
 (load-theme 'gruber-darker)
+
+;; (add-to-list pdf-view-incompatible-modes
+;;              display-line-numbers-mode)
+(dolist (mode '(pdf-view-mode-hook))
+ (add-hook mode (lambda () (display-line-numbers-mode -1))))
+
+(use-package pdf-tools)
+
+(defvar tv/prefer-pdf-tools (fboundp 'pdf-view-mode))
+(defun tv/start-pdf-tools-if-pdf ()
+  (when (and tv/prefer-pdf-tools
+             (eq doc-view-doc-type 'pdf))
+    (pdf-view-mode)))
+
+(add-hook 'doc-view-mode-hook 'tv/start-pdf-tools-if-pdf)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((lisp . t)))

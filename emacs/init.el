@@ -2,6 +2,7 @@
 (load "~/.emacs.d/packages.el")
 (load "~/.emacs.d/multiple-cursors.el")
 (load "~/.emacs.d/slime.el")
+(load "~/.emacs.d/org-modern.el")
 
 
 (custom-set-variables
@@ -14,7 +15,7 @@
      default))
  '(package-selected-packages
    '(## clojure-mode forth-mode go-mode gruber-darker-theme lua-mode
-	multiple-cursors org-modern slime smartparens)))
+	multiple-cursors org-modern pdf-tools slime smartparens)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

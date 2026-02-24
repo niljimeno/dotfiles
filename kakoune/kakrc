@@ -32,6 +32,7 @@ plug "niljimeno/yazi.kak"
 plug "niljimeno/qmake.kak"
 plug "niljimeno/compile.kak"
 plug "alexherbo2/auto-pairs.kak"
+plug 'thacuber2a03/highlighters.kak'
 
 enable-auto-pairs
 
@@ -115,10 +116,18 @@ map global normal <c-w> ':split<ret>'
 map global insert <c-w> '<esc>:split<ret>i'
 
 
-plug "eraserhd/parinfer-rust" config %{
-    hook global WinSetOption filetype=(clojure|lisp|picolisp|racket|scheme) %{
-        parinfer-enable-window -smart
-    }
-}
 source "%val{config}/csharp.kak"
 source "%val{config}/idris.kak"
+source "%val{config}/jk.kak"
+
+# add-highlighter global/ number-lines
+# hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines }
+# add-highlighter global/ number-lines -relative
+# hook global WinCreate ^[^*]+$ %{ add-highlighter window/ number-lines -relative }
+add-highlighter global/ number-lines
+def switch-number-line -params .. %{
+    try %{ remove-highlighter window/number-lines }
+    add-highlighter window/number-lines number-lines %arg{@}
+}
+hook global NormalKey  0   'switch-number-line -relative'
+hook global NormalKey \D.* 'switch-number-line'

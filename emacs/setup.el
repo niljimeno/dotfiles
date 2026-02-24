@@ -5,7 +5,8 @@
 (setq inhibit-startup-screen t)
 (setq make-backup-files nil)
 
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :family "Sarasa Mono Slab K")
+(set-face-attribute 'default nil :height 140)
 
 (global-display-line-numbers-mode)
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
