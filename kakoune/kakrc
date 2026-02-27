@@ -2,7 +2,7 @@
 # declare-option str menu 'rgb:222222'
 # set-face global MenuBackground "default,%opt{menu}"
 
-colorscheme mygruvbox
+colorscheme kanagawa
 
 # other aesthetic options
 set-option global tabstop 4
@@ -138,3 +138,11 @@ def switch-number-line -params .. %{
 }
 hook global NormalKey  0   'switch-number-line -relative'
 hook global NormalKey \D.* 'switch-number-line'
+
+# insert mode keys
+map global insert <a-w> '<esc><a-w><s-left>a'
+map global insert <a-b> '<esc><a-b><s-right>i'
+
+map global insert <a-d> '<esc><a-w>c'
+map global insert <c-k> '<esc><a-l>c'
+map global insert <c-d> '<esc>c'

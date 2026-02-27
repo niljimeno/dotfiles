@@ -10,6 +10,7 @@ unclutter -idle 1 -b
 
 # xgifwallpaper ~/.config/wallpapers/lain_wired.gif &
 
-feh --bg-fill ~/.config/wallpapers/cicada7.jpg
+# feh --bg-fill ~/.config/wallpapers/cicada8.jpg
+feh --bg-fill ~/.config/wallpapers/astro-dark.jpg
 picom &
 exec enforcer > /tmp/enforcer.log
