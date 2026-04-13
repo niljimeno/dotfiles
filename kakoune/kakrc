@@ -12,6 +12,7 @@ set-option global scrolloff 4,8
 hook global BufOpenFile .* %{ editorconfig-load }
 hook global BufNewFile .* editorconfig-load
 
+
 # clipboard ( now works on the default clipboard! )
 map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -ib<ret>"
 map -docstring "paste the clipboard" global user p "<a-!> xsel -ob<ret>"
@@ -41,18 +42,18 @@ plug "andreyorst/fzf.kak" config %{
   # settings of module
 }
 
-hook global NormalKey <c-a> %{ try %{
-    execute-keys 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
-}}
+map global normal <a-a> 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
+map global insert <a-a> '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
 
-hook global InsertKey <c-a> %{ try %{
-    execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
-}}
-
+#hook global InsertKey <a-a> %{ try %{
+#    execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
+#}}
+#hook global NormalKey <a-a> %{ try %{
+#    execute-keys 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
+#}}
 
 # lsp
 eval %sh{kak-lsp}
-lsp-enable
 
 map global insert <tab> '<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>' -docstring 'Select next snippet placeholder'
 map global normal <c-l> ':enter-user-mode lsp<ret>' -docstring 'LSP mode'
@@ -94,17 +95,18 @@ hook -group lsp-filetype-csharp global BufSetOption filetype=csharp %{
 
 # autoformat on save
 hook global BufSetOption filetype=(clojure|go) %{
+    lsp-enable
     hook buffer BufWritePre .* lsp-formatting-sync
 }
 
 # open a new terminal window
-map global normal <c-e> ':terminal sh<ret>'
+map global normal <c-e> ':terminal bash<ret>'
 
-map -docstring "Compile (prompted)" \
-    global normal <a-r> ':compile<ret>'
+# compile (prompted)
+map global normal <a-r> ':compile<ret>'
 
-map -docstring "Compile (no prompts)" \
-    global normal <c-r> ':compile-quick<ret>'
+# compile (no prompts)
+map global normal <c-r> ':compile-quick<ret>'
 
 
 # multiple windows
@@ -143,6 +145,31 @@ hook global NormalKey \D.* 'switch-number-line'
 map global insert <a-w> '<esc><a-w><s-left>a'
 map global insert <a-b> '<esc><a-b><s-right>i'
 
+map global insert <c-o> '<ret><up>'
 map global insert <a-d> '<esc><a-w>c'
 map global insert <c-k> '<esc><a-l>c'
 map global insert <c-d> '<esc>c'
+
+map global insert <c-a> '<esc>I'
+map global insert <c-e> '<esc>A'
+
+hook global BufCreate .+\.(tmpl)$ %{
+	set-option buffer filetype html
+}
+
+
+map global insert <a-s> '<esc>: enter-user-mode spanish<ret>' -docstring 'spanish'
+
+declare-user-mode spanish
+map global spanish n 'iñ'
+map global spanish a 'iá'
+map global spanish e 'ié'
+map global spanish i 'ií'
+map global spanish o 'ió'
+map global spanish u 'iú'
+map global spanish N 'iÑ'
+map global spanish A 'iÁ'
+map global spanish E 'iÉ'
+map global spanish I 'iÍ'
+map global spanish O 'iÓ'
+map global spanish U 'iÚ'

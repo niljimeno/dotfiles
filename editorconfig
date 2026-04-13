@@ -4,6 +4,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = space
 indent_size = 4
+# tab_width = 8
 
 [{*.gleam,*.ex,*.exs,*.nim,*.lisp,*.fnl,*.scm,*.clj,*.janet,*.idr}]
 indent_style = space

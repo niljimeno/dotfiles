@@ -17,3 +17,6 @@ cp -r ~/tooling/st/ ./suckless/
 # bash
 cp ~/.bashrc ./sh/bashrc
 cp ~/.xinitrc ./sh/xinitrc
+
+cp ~/.config/ncmpcpp/* ./ncmpcpp/
+cat /etc/mpd.conf > ./ncmpcpp/mpd.conf

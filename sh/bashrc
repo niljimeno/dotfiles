@@ -40,6 +40,9 @@ alias rec='ffmpeg -draw_mouse 0 -f x11grab -video_size 1920x1080 -framerate 30 -
 alias rec-mute='ffmpeg -draw_mouse 0 -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0'
 alias rec-audio='ffmpeg -f pulse -i default'
 
+# pactl list
+alias bigfatvideo="ffmpeg -f pulse -ac 2 -ar 48000 -i alsa_output.pci-0000_06_00.6.HiFi__Headphones__sink.monitor -f pulse -ac 1 -ar 44100 -i default -filter_complex amix=inputs=2 -f x11grab -r 30 -video_size 1920x1080 -i :0.0+0,0 -vcodec libx264 -preset veryfast -crf 18 -acodec libmp3lame -ar 44100 -q:a 1"
+
 alias totp='oathtool --totp --base32'
 
 alias when="when --past=0"
@@ -55,3 +58,9 @@ alias ghs="gh search repos --sort updated"
 alias rethread="rethread browser --url https://niljimeno.github.io/web.rethread/"
 
 alias neofetch="fastfetch --logo ~/git/dotfiles/cicada"
+
+alias drifblim="uxn11 ~/git/uxn11/bin/drifblim.rom"
+
+alias autoremove='sudo pacman -R $(pacman -Qdtq)'
+
+alias copy='xclip -sel c'

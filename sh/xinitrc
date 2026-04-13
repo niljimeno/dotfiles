@@ -11,6 +11,14 @@ unclutter -idle 1 -b
 # xgifwallpaper ~/.config/wallpapers/lain_wired.gif &
 
 # feh --bg-fill ~/.config/wallpapers/cicada8.jpg
+# feh --bg-max ~/.config/wallpapers//arno.png
 feh --bg-fill ~/.config/wallpapers/astro-dark.jpg
-picom &
+
+# adding this because of retards
+systemctl --user set-environment DISPLAY=:0
+/~/ systemctl --user start xdg-desktop-portal-gtk
+
+# picom &
 exec enforcer > /tmp/enforcer.log
+
+# exec dwm
