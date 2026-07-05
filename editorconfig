@@ -6,7 +6,7 @@ indent_style = space
 indent_size = 4
 # tab_width = 8
 
-[{*.gleam,*.ex,*.exs,*.nim,*.lisp,*.fnl,*.scm,*.clj,*.janet,*.idr}]
+[{*.gleam,*.ex,*.exs,*.nim,*.lisp,*.fnl,*.scm,*.clj,*.janet,*.idr,*.elm,*.js,*.tsx,*.dart,*.xml,*.yaml}]
 indent_style = space
 indent_size = 2
 

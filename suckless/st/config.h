@@ -6,15 +6,16 @@
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-// #include "themes/topi.h"
-#include "themes/tmp.h"
+#include "themes/flowers.h"
 // static char *font = "Iosevka Term:pixelsize=24";
-static char *font = "Sarasa Mono Slab K:pixelsize=24";
+// static char *font = "Sarasa Mono Slab K:pixelsize=20";
+static char *font = "Sarasa Mono Slab K:pixelsize=22";
 
 // static int borderpx = 14;
-static int borderpx = 8;
+// static int borderpx = 8;
+static int borderpx = 1;
 
-float alpha = 0.8;
+float alpha = 0.9;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -117,7 +118,7 @@ unsigned int tabspaces = 8;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 4;
+static unsigned int cursorshape = 2;
 
 /*
  * Default columns and rows numbers

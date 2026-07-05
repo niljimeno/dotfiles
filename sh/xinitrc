@@ -4,21 +4,21 @@ redshift -O 3000 -P
 # endgame
 # doas setxkbmap -variant dvorak
 
-rm ~/.bash_history*
+shred ~/.bash_history*
+rm -f ~/.bash_history*
+rm -f ~/acme.dump*
+rm -f ~/\#\**
 
 unclutter -idle 1 -b
 
 # xgifwallpaper ~/.config/wallpapers/lain_wired.gif &
 
-# feh --bg-fill ~/.config/wallpapers/cicada8.jpg
-# feh --bg-max ~/.config/wallpapers//arno.png
-feh --bg-fill ~/.config/wallpapers/astro-dark.jpg
-
 # adding this because of retards
 systemctl --user set-environment DISPLAY=:0
-/~/ systemctl --user start xdg-desktop-portal-gtk
 
-# picom &
+feh --bg-fill ~/.config/wallpapers/flowers.jpg
+picom &
+
 exec enforcer > /tmp/enforcer.log
-
 # exec dwm
+# exec wmaker

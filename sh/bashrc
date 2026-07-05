@@ -8,7 +8,8 @@
 alias ls='ls --color=auto --group-directories-first'
 alias grep='grep --color=auto'
 # PS1='[\u@\h \W]\$ '
-PS1='/\W/ '
+# PS1='/\W/ '
+PS1='\W $ '
 
 export BUN_INSTALL="$HOME/.bun"
 export GOPATH="$HOME/.go"
@@ -22,23 +23,21 @@ alias yt-playlist='yt-song -o "%(playlist_index)s - %(title)s.%(ext)s"'
 
 alias pipActivate="source ~/.venv/bin/activate"
 
-eval "$(zoxide init bash)"
-
 alias blackout="xset dpms force off"
 
 alias bk='sudo rsync -ruv --delete --no-checksum'
 alias vim="nvim"
-eval $(opam env)
 
 # luke smith mode
 alias key="screenkey"
 
 alias mark='echo $(pwd) > $HOME/.config/progress/resume'
-alias resume='cd $(cat $HOME/.config/progress/resume)'
+alias resume='cd "$(cat $HOME/.config/progress/resume)"'
 
 alias rec='ffmpeg -draw_mouse 0 -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0 -f pulse -i default -c:v libx264 -preset ultrafast -crf 23 -c:a aac -ac 1 -ar 48000 -avoid_negative_ts make_zero'
 alias rec-mute='ffmpeg -draw_mouse 0 -f x11grab -video_size 1920x1080 -framerate 30 -i :0.0'
 alias rec-audio='ffmpeg -f pulse -i default'
+alias rec-all-audio='ffmpeg -f pulse -ac 2 -ar 48000 -i alsa_output.pci-0000_06_00.6.HiFi__Headphones__sink.monitor -f pulse -ac 1 -ar 44100 -i default -filter_complex amix=inputs=2'
 
 # pactl list
 alias bigfatvideo="ffmpeg -f pulse -ac 2 -ar 48000 -i alsa_output.pci-0000_06_00.6.HiFi__Headphones__sink.monitor -f pulse -ac 1 -ar 44100 -i default -filter_complex amix=inputs=2 -f x11grab -r 30 -video_size 1920x1080 -i :0.0+0,0 -vcodec libx264 -preset veryfast -crf 18 -acodec libmp3lame -ar 44100 -q:a 1"
@@ -51,9 +50,6 @@ alias shadilay="less ~/.shadilay"
 
 alias search-fonts="fc-list : family | grep -i" # add name of the font, like sarasa
 
-alias fixcursor="printf '\033[4 q'"
-alias yazi="yazi && fixcursor"
-
 alias ghs="gh search repos --sort updated"
 alias rethread="rethread browser --url https://niljimeno.github.io/web.rethread/"
 
@@ -64,3 +60,17 @@ alias drifblim="uxn11 ~/git/uxn11/bin/drifblim.rom"
 alias autoremove='sudo pacman -R $(pacman -Qdtq)'
 
 alias copy='xclip -sel c'
+alias rebar='rebar3'
+
+eval "$(noxide init)"
+export PKG_CONFIG_PATH="$HOME/.local/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# export HINATA_LLM_MODEL=deepseek/deepseek-v4-flash
+alias e="$EDITOR"
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+export egrep="egrep"
+
+complete -cf doas

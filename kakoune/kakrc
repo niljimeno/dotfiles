@@ -2,7 +2,7 @@
 # declare-option str menu 'rgb:222222'
 # set-face global MenuBackground "default,%opt{menu}"
 
-colorscheme kanagawa
+colorscheme ayu-dark
 
 # other aesthetic options
 set-option global tabstop 4
@@ -11,7 +11,6 @@ set-option global scrolloff 4,8
 # use editorconfig
 hook global BufOpenFile .* %{ editorconfig-load }
 hook global BufNewFile .* editorconfig-load
-
 
 # clipboard ( now works on the default clipboard! )
 map -docstring "yank the selection into the clipboard" global user y "<a-|> xsel -ib<ret>"
@@ -33,6 +32,7 @@ plug "niljimeno/yazi.kak"
 plug "niljimeno/qmake.kak"
 plug "niljimeno/compile.kak"
 plug "alexherbo2/auto-pairs.kak"
+plug "zeroplissken/clak.kak"
 
 enable-auto-pairs
 
@@ -42,15 +42,13 @@ plug "andreyorst/fzf.kak" config %{
   # settings of module
 }
 
-map global normal <a-a> 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
-map global insert <a-a> '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
+# hook global NormalKey <c-z> %{ try %{
+#     execute-keys 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
+# }}
 
-#hook global InsertKey <a-a> %{ try %{
-#    execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
-#}}
-#hook global NormalKey <a-a> %{ try %{
-#    execute-keys 'bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;<esc>'
-#}}
+hook global InsertKey <a-a> %{ try %{
+    execute-keys '<esc>bi<lt><esc>heya<gt><lt>/<esc>pa<gt><esc><a-f><lt>;i'
+}}
 
 # lsp
 eval %sh{kak-lsp}
@@ -93,10 +91,15 @@ hook -group lsp-filetype-csharp global BufSetOption filetype=csharp %{
     }
 }
 
+
 # autoformat on save
-hook global BufSetOption filetype=(clojure|go) %{
-    lsp-enable
+hook global BufSetOption filetype=(go|rust|java) %{
     hook buffer BufWritePre .* lsp-formatting-sync
+    lsp-enable
+}
+
+hook global BufSetOption filetype=(elm) %{
+    lsp-enable
 }
 
 # open a new terminal window
@@ -158,7 +161,7 @@ hook global BufCreate .+\.(tmpl)$ %{
 }
 
 
-map global insert <a-s> '<esc>: enter-user-mode spanish<ret>' -docstring 'spanish'
+map global insert <a-s> '<esc>:enter-user-mode spanish<ret>' -docstring 'spanish'
 
 declare-user-mode spanish
 map global spanish n 'iñ'
